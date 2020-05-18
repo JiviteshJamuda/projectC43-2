@@ -103,12 +103,12 @@ function draw() {
   ball.bounceOff(borderRight);
   ball.bounceOff(borderLeft);
   
+  // Serve
   if(gameState === "serve"){
     textAlign(CENTER);
     textSize(25);
     text("Press Space to serve",325,570)
 
-    // Serve
     if(keyDown("space")){
       ball.velocityX = 8;
       ball.velocityY = 8;
@@ -116,12 +116,6 @@ function draw() {
     };
   };
   
-
-  if(keyDown("UP_ARROW")){
-    score++;
-  };
-
-
   // Lose
   if(ball.y > 650){
     ball.x = 325;
