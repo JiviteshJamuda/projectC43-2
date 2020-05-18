@@ -150,5 +150,11 @@ function draw() {
     gameState = "end"
   };
 
+  // Show the number of lives left
+  textAlign(CENTER);
+  textSize(25);
+  fill("black");
+  text("Lives : " + lives,590,30);
+
   drawSprites();
 }
