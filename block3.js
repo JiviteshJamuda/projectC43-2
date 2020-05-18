@@ -13,7 +13,7 @@ class greenBlock {
         if(ball.isTouching(this.gBlock)){
             ball.bounceOff(this.gBlock);
             this.gBlock.destroy();
-
+            score++;
         };
     }
 }

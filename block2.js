@@ -12,6 +12,7 @@ class redBlock {
         if(ball.isTouching(this.rBlock)){
             ball.bounceOff(this.rBlock);
             this.rBlock.destroy();          
+            score++;
         };
     }
 }

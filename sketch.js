@@ -1,9 +1,19 @@
+// Variables for the player and the ball
 var playerPaddle;
 var ball;
+
+// Variables for the boundaries
 var borderTop, borderLeft, borderRight;
+
+// Variables for the targets
 var bTarget1, rTarget1, gTarget1;
+
+// Score, lives
 var score = 0, lives = 3;
+
+// Gamestate
 var gameState = "serve";
+
 
 function setup() {
   createCanvas(650,650);
@@ -44,10 +54,12 @@ function setup() {
   gTarget7 = new greenBlock(610,190);
   gTarget8 = new greenBlock(560,220);
 
-
+  // Creating the player 
   playerPaddle = createSprite(325,625,70,15);
   playerPaddle.shapeColor = "black";
+  // Creating the ball
   ball = createSprite(325,600,10,10);
+  ball.shapeColor = "brown";
  
 }
 
@@ -85,28 +97,64 @@ function draw() {
   // Controlling the paddle using the movement of mouse
   playerPaddle.x = mouseX;
 
+  // Making the ball bounce off the edges
   ball.bounceOff(playerPaddle);
   ball.bounceOff(borderTop);
   ball.bounceOff(borderRight);
   ball.bounceOff(borderLeft);
   
+  if(gameState === "serve"){
+    textAlign(CENTER);
+    textSize(25);
+    text("Press Space to serve",325,570)
 
-  if(keyDown("space")){
-    ball.velocityX = 8;
-    ball.velocityY = 8;
-  }
+    // Serve
+    if(keyDown("space")){
+      ball.velocityX = 8;
+      ball.velocityY = 8;
+      gameState = "play";
+    };
+  };
+  
 
   if(keyDown("UP_ARROW")){
     score++;
-  }
+  };
 
+
+  // Lose
+  if(ball.y > 650){
+    ball.x = 325;
+    ball.y = 600;
+    ball.velocityX = 0;
+    ball.velocityY = 0;
+    lives--;
+    gameState = "serve";
+  };
+
+  // Game lost
+  if(lives <= 0){
+    clear();
+    ball.velocityX = 0;
+    ball.velocityY = 0;
+    textSize(100);
+    textAlign(CENTER);
+    fill("red");
+    text("YOU LOST",325,325);
+    gameState = "end";
+  };
+
+  // Winning condition
   if(score >= 24){
     clear();
     ball.velocityX = 0;
     ball.velocityY = 0;
     textSize(100);
     textAlign(CENTER);
+    fill("green");
     text("YOU WIN",325,325);
-  }
+    gameState = "end"
+  };
+
   drawSprites();
 }

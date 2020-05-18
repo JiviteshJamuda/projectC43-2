@@ -12,7 +12,8 @@ class blueBlock {
     kill(){
         if(ball.isTouching(this.bBlock)){
             ball.bounceOff(this.bBlock);
-            this.bBlock.destroy();          
+            this.bBlock.destroy();   
+            score++;       
         };
     }
 }
